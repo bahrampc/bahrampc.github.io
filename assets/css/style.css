@@ -91,6 +91,7 @@ nav a:hover {
 }
 
 .card label, .socials-links label {
+    display: block;
     margin: 0 0 1rem;
     font-size: 1.8rem;
     color: var(--secondary-color);

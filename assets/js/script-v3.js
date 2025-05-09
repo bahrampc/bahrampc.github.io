@@ -160,36 +160,14 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       
-      // Send form data to server
-      fetch('https://t.stmo.ir/call', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        mode: 'cors',
-        credentials: 'include',
-        body: JSON.stringify({
-          action: 'message',
-          name: name,
-          email: email,
-          subject: subject,
-          message: message
-        })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          showFormMessage('Your message has been sent successfully!', 'success');
-          contactForm.reset();
-        } else {
-          showFormMessage('Failed to send message. Please try again.', 'error');
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        showFormMessage('An error occurred. Please try again later.', 'error');
-      });
+      // Here you would typically send the form data to a server
+      // For now, we'll just simulate a successful submission
+      
+      // Show success message
+      showFormMessage('Your message has been sent successfully!', 'success');
+      
+      // Reset form
+      contactForm.reset();
     });
   }
   

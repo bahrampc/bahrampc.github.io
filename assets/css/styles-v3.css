@@ -611,9 +611,9 @@ h2 {
 }
 
 .contact-container {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-3xl);
+  gap: var(--spacing-3xl); */
 }
 
 .contact-info p {
@@ -843,7 +843,7 @@ footer {
   }
   
   .contact-container {
-    grid-template-columns: repeat(2, 1fr);
+    /* grid-template-columns: repeat(2, 1fr); */
   }
   
   .hero-content {

@@ -1,37 +1,73 @@
-## Welcome to GitHub Pages
+# Bahram's Personal Website
 
-You can use the [editor on GitHub](https://github.com/bahrampc/bahrampc.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Welcome to my personal website repository! This is where I showcase my work, share my thoughts, and connect with the world.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## 🚀 Features
 
-### Markdown
+- Modern and responsive design
+- Interactive UI elements
+- Contact form for communication
+- Blog section for sharing thoughts
+- Portfolio showcase
+- Custom cursor effects
+- Smooth animations and transitions
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## 🛠️ Technologies Used
 
-```markdown
-Syntax highlighted code block
+- HTML5
+- CSS3
+- JavaScript (ES6+)
+- Feather Icons
+- Intersection Observer API
+- Custom animations
+- Responsive design principles
 
-# Header 1
-## Header 2
-### Header 3
+## 📦 Project Structure
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```
+bahrampc.github.io/
+├── assets/
+│   ├── css/
+│   ├── js/
+│   └── images/
+└── index.html
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## 🚀 Getting Started
 
-### Jekyll Themes
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/bahrampc/bahrampc.github.io.git
+   ```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/bahrampc/bahrampc.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+2. Open `index.html` in your browser to view the website locally.
 
-### Support or Contact
+## 🎨 Customization
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+- Modify `assets/css/style.css` for styling changes
+- Update `assets/js/script.js` for interactive features
+- Edit content in `index.html` and other HTML files
+
+## 🌐 Live Website
+
+Visit my website at: [bahrampc.ir](https://bahrampc.ir)
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🤝 Contact
+
+Feel free to reach out to me:
+- Email: [b@hram.ir](mailto:b@hram.ir)
+- GitHub: [@bahrampc](https://github.com/bahrampc)
+
+## 🙏 Acknowledgments
+
+- Thanks to all contributors and supporters
+- Special thanks to the open-source community
+- Inspired by modern web design trends
+
+---
+
+⭐ Star this repository if you find it helpful!

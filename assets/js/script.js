@@ -16,217 +16,170 @@ document.addEventListener('DOMContentLoaded', function() {
   const cursor = document.querySelector('.cursor');
   const cursorFollower = document.querySelector('.cursor-follower');
   
-  document.addEventListener('mousemove', function(e) {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    
-    setTimeout(function() {
-      cursorFollower.style.left = e.clientX + 'px';
-      cursorFollower.style.top = e.clientY + 'px';
-    }, 100);
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
+    cursorFollower.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
   });
   
-  document.addEventListener('mousedown', function() {
-    cursor.style.transform = 'translate(-50%, -50%) scale(0.7)';
-    cursorFollower.style.transform = 'translate(-50%, -50%) scale(0.7)';
-  });
-  
-  document.addEventListener('mouseup', function() {
-    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-    cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
-  });
-  
-  // Add hover effect to links and buttons
-  const links = document.querySelectorAll('a, button');
-  links.forEach(link => {
-    link.addEventListener('mouseenter', function() {
-      cursorFollower.style.width = '50px';
-      cursorFollower.style.height = '50px';
-      cursor.style.opacity = '0.5';
+  // Mouse enter/leave effects
+  document.querySelectorAll('a, button').forEach(element => {
+    element.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(1.5)';
+      cursorFollower.style.transform = 'scale(1.5)';
     });
     
-    link.addEventListener('mouseleave', function() {
-      cursorFollower.style.width = '40px';
-      cursorFollower.style.height = '40px';
-      cursor.style.opacity = '1';
+    element.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      cursorFollower.style.transform = 'scale(1)';
     });
   });
   
   // Mobile menu toggle
   const menuToggle = document.querySelector('.menu-toggle');
   const mobileMenu = document.querySelector('.mobile-menu');
-  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
   
-  menuToggle.addEventListener('click', function() {
-    menuToggle.classList.toggle('active');
+  menuToggle.addEventListener('click', () => {
     mobileMenu.classList.toggle('active');
-    document.body.classList.toggle('no-scroll');
+    menuToggle.classList.toggle('active');
   });
   
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', function() {
-      menuToggle.classList.remove('active');
+  // Close mobile menu when clicking a link
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
       mobileMenu.classList.remove('active');
-      document.body.classList.remove('no-scroll');
+      menuToggle.classList.remove('active');
     });
   });
   
-  // Header scroll behavior
-  const header = document.querySelector('header');
-  let lastScrollTop = 0;
-  
-  window.addEventListener('scroll', function() {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    if (scrollTop > lastScrollTop && scrollTop > 100) {
-      header.classList.add('hidden');
-    } else {
-      header.classList.remove('hidden');
-    }
-    
-    lastScrollTop = scrollTop;
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
   });
   
-  // Scroll reveal animation
+  // Parallax effect
+  document.addEventListener('mousemove', (e) => {
+    const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+    const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+    
+    document.querySelectorAll('.skill-card, .interest-item, .contact-item').forEach(element => {
+      element.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    });
+  });
+  
+  // Text scramble effect
+  class TextScramble {
+    constructor(el) {
+      this.el = el;
+      this.chars = '!<>-_\\/[]{}—=+*^?#________';
+      this.update = this.update.bind(this);
+    }
+    
+    setText(newText) {
+      const oldText = this.el.innerText;
+      const length = Math.max(oldText.length, newText.length);
+      const promise = new Promise((resolve) => this.resolve = resolve);
+      this.queue = [];
+      for (let i = 0; i < length; i++) {
+        const from = oldText[i] || '';
+        const to = newText[i] || '';
+        const start = Math.floor(Math.random() * 40);
+        const end = start + Math.floor(Math.random() * 40);
+        this.queue.push({ from, to, start, end });
+      }
+      cancelAnimationFrame(this.frameRequest);
+      this.frame = 0;
+      this.update();
+      return promise;
+    }
+    
+    update() {
+      let output = '';
+      let complete = 0;
+      for (let i = 0, n = this.queue.length; i < n; i++) {
+        let { from, to, start, end, char } = this.queue[i];
+        if (this.frame >= end) {
+          complete++;
+          output += to;
+        } else if (this.frame >= start) {
+          if (!char || Math.random() < 0.28) {
+            char = this.randomChar();
+            this.queue[i].char = char;
+          }
+          output += `<span class="dud">${char}</span>`;
+        } else {
+          output += from;
+        }
+      }
+      this.el.innerHTML = output;
+      if (complete === this.queue.length) {
+        this.resolve();
+      } else {
+        this.frameRequest = requestAnimationFrame(this.update);
+        this.frame++;
+      }
+    }
+    
+    randomChar() {
+      return this.chars[Math.floor(Math.random() * this.chars.length)];
+    }
+  }
+  
+  // Apply text scramble effect to headings
+  const phrases = ['Back-end Web Developer', 'AI Enthusiast', 'Blockchain Explorer'];
+  const el = document.querySelector('.hero-text h2');
+  const fx = new TextScramble(el);
+  
+  let counter = 0;
+  const next = () => {
+    fx.setText(phrases[counter]).then(() => {
+      setTimeout(next, 2000);
+    });
+    counter = (counter + 1) % phrases.length;
+  };
+  
+  next();
+  
+  // Intersection Observer for animations
   const observerOptions = {
     root: null,
     rootMargin: '0px',
     threshold: 0.1
   };
   
-  const observer = new IntersectionObserver((entries, observer) => {
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
+        entry.target.classList.add('animate');
         observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
   
-  const animatedElements = document.querySelectorAll('[data-aos]');
-  animatedElements.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
+  document.querySelectorAll('.skill-card, .interest-item, .contact-item').forEach(element => {
+    observer.observe(element);
   });
   
-  // Add in-view class when element is in viewport
-  document.addEventListener('scroll', function() {
-    animatedElements.forEach(el => {
-      if (isInViewport(el)) {
-        setTimeout(() => {
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-        }, el.dataset.aosDelay || 0);
-      }
-    });
-  });
+  // Email obfuscation
+  const email = 'b@hram.ir';
+  const emailElement = document.getElementById('liem');
+  const emailElementContact = document.getElementById('liemc');
   
-  // Check if element is in viewport
-  function isInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-      rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.bottom >= 0
-    );
+  if (emailElement) {
+    emailElement.textContent = email;
+    emailElement.href = `mailto:${email}`;
   }
   
-  // Trigger initial scroll to show elements in viewport
-  setTimeout(() => {
-    window.dispatchEvent(new Event('scroll'));
-  }, 500);
-  
-  // Form validation and submission
-  const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Get form values
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const subject = document.getElementById('subject').value;
-      const message = document.getElementById('message').value;
-      
-      // Basic validation
-      if (!name || !email || !subject || !message) {
-        showFormMessage('Please fill in all fields', 'error');
-        return;
-      }
-      
-      if (!isValidEmail(email)) {
-        showFormMessage('Please enter a valid email address', 'error');
-        return;
-      }
-      
-      // Here you would typically send the form data to a server
-      // For now, we'll just simulate a successful submission
-      
-      // Show success message
-      showFormMessage('Your message has been sent successfully!', 'success');
-      
-      // Reset form
-      contactForm.reset();
-    });
+  if (emailElementContact) {
+    emailElementContact.textContent = email;
+    emailElementContact.href = `mailto:${email}`;
   }
-  
-  // Validate email format
-  function isValidEmail(email) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-  }
-  
-  // Show form message
-  function showFormMessage(message, type) {
-    // Remove any existing message
-    const existingMessage = document.querySelector('.form-message');
-    if (existingMessage) {
-      existingMessage.remove();
-    }
-    
-    // Create new message element
-    const messageElement = document.createElement('div');
-    messageElement.className = `form-message ${type}`;
-    messageElement.textContent = message;
-    
-    // Add message to form
-    contactForm.appendChild(messageElement);
-    
-    // Remove message after 5 seconds
-    setTimeout(() => {
-      messageElement.remove();
-    }, 5000);
-  }
-  
-  // Add CSS for form messages
-  const style = document.createElement('style');
-  style.textContent = `
-    .form-message {
-      padding: 10px;
-      margin-top: 15px;
-      border-radius: 5px;
-      font-size: 14px;
-    }
-    .form-message.success {
-      background-color: rgba(76, 175, 80, 0.2);
-      color: #4CAF50;
-      border: 1px solid #4CAF50;
-    }
-    .form-message.error {
-      background-color: rgba(244, 67, 54, 0.2);
-      color: #F44336;
-      border: 1px solid #F44336;
-    }
-    .no-scroll {
-      overflow: hidden;
-    }
-  `;
-  document.head.appendChild(style);
-  
-  const name = 'b';
-  const domain = 'hram.ir';
-  const letterad = name + '@' + domain;
-  document.getElementById('liem').innerHTML = '<a href="mailto:' + letterad + '">' + letterad + '</a>';
-  document.getElementById('liemc').innerHTML = letterad;
 });

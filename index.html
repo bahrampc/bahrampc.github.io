@@ -16,14 +16,14 @@
 	<meta property="og:image:type" content="image/jpeg">
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:site" content="@bahrampc">
-	<meta name="msapplication-TileImage" content="/assets/img/favicon.ico">
+	<meta name="msapplication-TileImage" content="assets/img/favicon.ico">
     <link rel="canonical" href="https://bahrampc.ir/">
-	<link rel="icon" href="/assets/img/favicon.ico" sizes="32x32">
-	<link rel="icon" href="/assets/img/favicon.ico" sizes="192x192">
-	<link rel="apple-touch-icon" href="/assets/img/favicon.ico">
+	<link rel="icon" href="assets/img/favicon.ico" sizes="32x32">
+	<link rel="icon" href="assets/img/favicon.ico" sizes="192x192">
+	<link rel="apple-touch-icon" href="assets/img/favicon.ico">
   <title>Bahram Afzali | Back-end Web Developer</title>
   <meta name="description" content="Personal website of Bahram Afzali, a Back-end Web Developer with interests in AI, blockchain, and more.">
-  <link rel="stylesheet" href="/assets/css/styles.css?ver=3.0.0">
+  <link rel="stylesheet" href="assets/css/styles.css?ver=3.0.0">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/feather-icons"></script>
   <script type="application/ld+json" class="yoast-schema-graph">
@@ -35,6 +35,12 @@
   <div class="cursor-follower"></div>
 
   <div class="page-wrapper">
+    <canvas id="particleCanvas"></canvas>
+    <div class="floating-elements">
+      <div class="floating-element" data-speed="2"></div>
+      <div class="floating-element" data-speed="3"></div>
+      <div class="floating-element" data-speed="1"></div>
+    </div>
     <!-- Header/Navigation -->
     <header>
       <div class="container">
@@ -91,38 +97,11 @@
       <div class="container">
         <div class="hero-content">
           <div class="hero-text">
-            <h1 class="reveal-text">Bahram Afzali</h1>
-            <h2 class="reveal-text delay-1">Back-end Web Developer</h2>
-            <div class="hero-email reveal-text delay-2">
-              <i data-feather="mail"></i>
-              <span id="liem"></span>
+            <div class="glitch-wrapper">
+              <h1 class="glitch" data-text="Bahram Afzali">Bahram Afzali</h1>
             </div>
-            <div class="hero-social reveal-text delay-3">
-              <a href="https://mastodon.social/@bahrampc" class="social-icon" aria-label="GitHub">
-                <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 32 32" width="32px" height="32px"><path d="M 15.9375 4.03125 C 12.917 4.0435 9.9179219 4.4269844 8.3574219 5.1464844 C 8.3574219 5.1464844 5 6.6748594 5 11.880859 C 5 18.077859 4.9955 25.860234 10.5625 27.365234 C 12.6945 27.938234 14.527953 28.061562 16.001953 27.976562 C 18.676953 27.825562 20 27.005859 20 27.005859 L 19.910156 25.029297 C 19.910156 25.029297 18.176297 25.640313 16.029297 25.570312 C 13.902297 25.495313 11.6615 25.335688 11.3125 22.679688 C 11.2805 22.432688 11.264625 22.182594 11.265625 21.933594 C 15.772625 23.052594 19.615828 22.420969 20.673828 22.292969 C 23.627828 21.933969 26.199344 20.081672 26.527344 18.388672 C 27.041344 15.720672 26.998047 11.880859 26.998047 11.880859 C 26.998047 6.6748594 23.646484 5.1464844 23.646484 5.1464844 C 22.000984 4.3779844 18.958 4.019 15.9375 4.03125 z M 12.705078 8.0019531 C 13.739953 8.0297031 14.762578 8.4927031 15.392578 9.4707031 L 16.001953 10.505859 L 16.609375 9.4707031 C 17.874375 7.5037031 20.709594 7.6264375 22.058594 9.1484375 C 23.302594 10.596438 23.025391 11.531 23.025391 18 L 23.025391 18.001953 L 20.578125 18.001953 L 20.578125 12.373047 C 20.578125 9.7380469 17.21875 9.6362812 17.21875 12.738281 L 17.21875 16 L 14.787109 16 L 14.787109 12.738281 C 14.787109 9.6362812 11.429688 9.7360938 11.429688 12.371094 L 11.429688 18 L 8.9765625 18 C 8.9765625 11.526 8.7043594 10.585438 9.9433594 9.1484375 C 10.622859 8.3824375 11.670203 7.9742031 12.705078 8.0019531 z"/></svg>
-              </a>
-              <a href="https://github.com/bahrampc" class="social-icon" aria-label="GitHub">
-                <i data-feather="github"></i>
-              </a>
-              <a href="https://www.linkedin.com/in/bahrampc/" class="social-icon" aria-label="LinkedIn">
-                <i data-feather="linkedin"></i>
-              </a>
-              <a href="https://x.com/bahrampc" class="social-icon" aria-label="Twitter">
-                <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 30 30" width="30px" height="30px"><path d="M26.37,26l-8.795-12.822l0.015,0.012L25.52,4h-2.65l-6.46,7.48L11.28,4H4.33l8.211,11.971L12.54,15.97L3.88,26h2.65 l7.182-8.322L19.42,26H26.37z M10.23,6l12.34,18h-2.1L8.12,6H10.23z"/></svg>
-              </a>
-              <a href="https://www.instagram.com/bahramafzali/" class="social-icon" aria-label="Instagram">
-                <i data-feather="instagram"></i>
-              </a>
-              <a href="https://t.me/bahrampc" class="social-icon" aria-label="Telegram">
-                <i data-feather="send"></i>
-              </a>
-            </div>
-          </div>
-          <div class="hero-image">
-            <div class="profile-container">
-              <div class="profile-glow"></div>
-              <img src="https://avatars.githubusercontent.com/u/4760623?v=4" alt="Bahram Afzali" class="profile-img">
-            </div>
+            <h2 class="reveal-text delay-1 cyber-text">Back-end Web Developer</h2>
+
           </div>
         </div>
       </div>
@@ -141,30 +120,36 @@
     <!-- Skills Section -->
     <section id="skills" class="skills-section">
       <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">My Expertise</h2>
-          <p class="section-subtitle">What I do best</p>
+        <div class="section-header cyber-header">
+          <h2 class="section-title glitch-small" data-text="My Expertise">My Expertise</h2>
+          <p class="section-subtitle cyber-text">What I do best</p>
         </div>
         <div class="skills-grid">
-          <div class="skill-card" data-aos="fade-up">
-            <div class="skill-icon">
-              <i data-feather="server"></i>
+          <div class="skill-card cyber-card" data-tilt>
+            <div class="skills-title-container">
+              <div class="skill-icon">
+                <i data-feather="server"></i>
+              </div>
+              <h3>Back-end Development</h3>
             </div>
-            <h3>Back-end Development</h3>
             <p>Building robust server-side applications and APIs with modern technologies.</p>
           </div>
-          <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
-            <div class="skill-icon">
-              <i data-feather="code"></i>
+          <div class="skill-card cyber-card" data-tilt data-aos="fade-up" data-aos-delay="100">
+            <div class="skills-title-container">
+              <div class="skill-icon">
+                <i data-feather="code"></i>
+              </div>
+              <h3>Web Development</h3>
             </div>
-            <h3>Web Development</h3>
             <p>Creating responsive and performant web applications with modern frameworks.</p>
           </div>
-          <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
-            <div class="skill-icon">
-              <i data-feather="cpu"></i>
+          <div class="skill-card cyber-card" data-tilt data-aos="fade-up" data-aos-delay="200">
+            <div class="skills-title-container">
+              <div class="skill-icon">
+                <i data-feather="cpu"></i>
+              </div>
+              <h3>AI & Machine Learning</h3>
             </div>
-            <h3>AI & Machine Learning</h3>
             <p>Exploring and implementing AI solutions and machine learning algorithms.</p>
           </div>
         </div>
@@ -174,36 +159,36 @@
     <!-- Interests Section -->
     <section id="interests" class="interests-section">
       <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Interests</h2>
-          <p class="section-subtitle">What I'm passionate about</p>
+        <div class="section-header cyber-header">
+          <h2 class="section-title glitch-small" data-text="Interests">Interests</h2>
+          <p class="section-subtitle cyber-text">What I'm passionate about</p>
         </div>
         <div class="interests-container">
-          <div class="interest-item" data-aos="zoom-in">
+          <div class="interest-item cyber-card" data-tilt>
             <div class="interest-icon">
               <i data-feather="code"></i>
             </div>
             <h3>Web Development</h3>
           </div>
-          <div class="interest-item" data-aos="zoom-in" data-aos-delay="100">
+          <div class="interest-item cyber-card" data-tilt data-aos="zoom-in" data-aos-delay="100">
             <div class="interest-icon">
               <i data-feather="cpu"></i>
             </div>
             <h3>AI & Machine Learning</h3>
           </div>
-          <div class="interest-item" data-aos="zoom-in" data-aos-delay="200">
+          <div class="interest-item cyber-card" data-tilt data-aos="zoom-in" data-aos-delay="200">
             <div class="interest-icon">
               <i data-feather="link"></i>
             </div>
             <h3>Blockchain & Cryptocurrency</h3>
           </div>
-          <div class="interest-item" data-aos="zoom-in" data-aos-delay="300">
+          <div class="interest-item cyber-card" data-tilt data-aos="zoom-in" data-aos-delay="300">
             <div class="interest-icon">
               <i data-feather="hard-drive"></i>
             </div>
             <h3>Electronics & Hardware</h3>
           </div>
-          <div class="interest-item" data-aos="zoom-in" data-aos-delay="400">
+          <div class="interest-item cyber-card" data-tilt data-aos="zoom-in" data-aos-delay="400">
             <div class="interest-icon">
               <i data-feather="music"></i>
             </div>
@@ -216,21 +201,16 @@
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
       <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Get In Touch</h2>
-          <p class="section-subtitle">Let's work together</p>
+        <div class="section-header cyber-header">
+          <h2 class="section-title glitch-small" data-text="Get In Touch">Get In Touch</h2>
+          <p class="section-subtitle cyber-text">Let's work together</p>
         </div>
         <div class="contact-container">
           <div class="contact-info">
             <p>Feel free to reach out if you're looking for a developer, have a question, or just want to connect.</p>
-            <div class="contact-item">
-              <div class="contact-icon">
-                <i data-feather="mail"></i>
-              </div>
-              <div class="contact-text">
-                <h4>Email</h4>
-                <p id="liemc"></p>
-              </div>
+            <div class="hero-email reveal-text delay-2 cyber-box">
+              <i data-feather="mail"></i>
+              <span id="liem"></span>
             </div>
             <div class="contact-social">
               <h4>Find me on</h4>
@@ -270,6 +250,8 @@
     </footer>
   </div>
 
-  <script src="/assets/js/script.js?ver=3.0.0"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+  <script src="assets/js/particles.js"></script>
+  <script src="assets/js/script.js?ver=3.0.0"></script>
 </body>
 </html>
